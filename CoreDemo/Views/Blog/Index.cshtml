@@ -1,0 +1,71 @@
+﻿@model List<CoreDemo.Models.BlogListItemViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<section class="main-content-w3layouts-agileits">
+    <div class="container">
+        <h3 class="tittle">Bloglar</h3>
+        <div class="inner-sec">
+            <!--left-->
+            <div class="left-blog-info-w3layouts-agileits text-left"> 
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-4 card">
+                            <a href="/Blog/BlogReadAll/@item.BlogID/">
+                                <img src="@item.BlogImage" class="card-img-top img-fluid" alt="">
+                            </a>
+                            <div class="card-body">
+                                <ul class="blog-icons my-4">
+                                <li>
+                                        <a href="#">
+                                            <i class="far fa-calendar-alt"></i>  @(((DateTime) item.BlogCreateDate).ToString("dd-MMM-yyyy")) 
+                                         </a>
+                                </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="far fa-thumbs-up"></i>@item.likeCount
+                                        </a>
+                                    </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="far fa-comment"></i>@item.CommentCount
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fas fa-eye"></i> @item.CategoryName    <!--Eager loading-->
+                                    </a>
+                                </li>
+
+                                </ul>
+                                <h5 class="card-title">
+                                    <a href="/Blog/BlogReadAll/@item.BlogID/">@item.BlogTitle</a>
+                                </h5>
+                                
+
+                                <p class=" card-text mb-3">
+                                @{
+                                        string text = item.BlogContent ?? "";
+                                        int max = text.Length > 130 ? 130 : text.Length;
+                                        int spaceIndex = text.Substring(0, max).LastIndexOf(" ");
+                                        if (spaceIndex == -1) { spaceIndex = max; }
+                                    }
+                                    @text.Substring(0, spaceIndex)...
+                                </p>
+                                <!--max = içerik en fazla 130 karakter alacak, kısa ise kısanın tamamı.
+                                text.Substring(0, max).LastIndexOf(" ") = ilk 130 karakterdeki son boşluğu buluyor.
+                                Eğer boşluk yoksa (-1) = direkt max ile kırpıyoruz.-->
+
+                                <a href="/Blog/BlogReadAll/@item.BlogID/" class="btn btn-primary read-m">Devamını Oku</a> 
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!--//left-->
+            </div>
+        </div>
+    </div>
+</section>

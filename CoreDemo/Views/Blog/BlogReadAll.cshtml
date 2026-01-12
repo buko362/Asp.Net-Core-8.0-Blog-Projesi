@@ -1,0 +1,172 @@
+﻿@using EntityLayer.Concrete
+@model List<Blog>
+@{
+    ViewData["Title"] = "BlogReadAll";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<body>
+
+    <!--//banner-->
+    <section class="banner-bottom">
+        <!--/blog-->
+        <div class="container">
+            <div class="row">
+                <!--left-->
+                <div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
+
+                    @foreach (var item in Model)
+                    {
+
+
+                        <div class="blog-grid-top">
+                            <div class="b-grid-top">
+                                <div class="blog_info_left_grid">
+                                    <img src="@item.BlogImage" style="width:100%; height:100%;" class="img-fluid" alt="">
+                                </div>
+                                <div class="blog-info-middle">
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <i class="far fa-user"></i> @ViewBag.writer
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="far fa-calendar-alt"></i> @(((DateTime)
+                                                                                            item.BlogCreateDate).ToString("dd-MMM-yyyy"))
+                                        </a>
+                                    </li>
+
+                                        <li>
+                                            <a href="#">
+                                                <i class="far fa-comment"></i> @ViewBag.CommentCount Yorum
+
+                                                <span style="margin-left:10px;">
+                                                @{
+                                                        double avg = (double)(ViewBag.AvgRating ?? 0.0);
+                                                        int cnt = (int)(ViewBag.RatingCount ?? 0);
+                                                        int stars = (int)Math.Round(avg, MidpointRounding.AwayFromZero);
+                                                    }
+                                                    @for (int i = 1; i <= 5; i++)
+                                                    {
+                                                        if (i <= stars)
+                                                        {
+                                                            <span>★</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span>☆</span>
+                                                        }
+                                                    }
+                                                    <small style="margin-left:6px;">@avg.ToString("0.0") (@cnt)</small>
+
+                                                </span>
+                                            </a>
+                                        </li>
+
+
+                                        <li class="mx-2">
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                <a href="javascript:void(0)" id="likeArea" onclick="toggleLike(@item.BlogID)">
+                                                    <i id="likeIcon" class="@((bool)ViewBag.Liked ? "fas fa-thumbs-up" : "far fa-thumbs-up")"></i>
+                                                    <span id="likeCount">@item.LikeCount</span> Beğeni
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="/Login/Index/">
+                                                    <i class="far fa-thumbs-up"></i><span id="likeCount">@item.LikeCount</span> Beğeni
+                                                </a>
+                                            }
+
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>
+                                <a href="single.html"> @item.BlogTitle</a>
+                            </h3>
+                            <p>
+                                @item.BlogContent
+                            </p>
+                            <a href="/Blog/Index/" class="btn btn-primary read-m">Blog Listesi</a>
+                        </div>
+
+                    }
+
+                    @await Component.InvokeAsync("CommentListByBlog", new { id = ViewBag.i })
+
+                    @* @await Html.PartialAsync("~/Views/Comment/CommentListByBlog.cshtml") *@ <!--yorumlar kısmını partial ile getirdik-->
+                    @await Component.InvokeAsync("AddComment", new { id = ViewBag.i })
+
+                </div>
+
+                <!--//left-->
+                <!--right-->
+                <aside class="col-lg-4 agileits-w3ls-right-blog-con text-right">
+                    <div class="right-blog-info text-left">
+                        <div class="tech-btm">
+                            <img src="~/CoreBlogTema/images/banner1.jpg" class="img-fluid" alt="">
+                        </div>
+
+                        <h4>Mail Bültenine Abone Ol</h4>
+                        @await Html.PartialAsync("~/Views/NewsLetter/SubscribeMail.cshtml")
+
+                        @await Component.InvokeAsync("CategoryList")
+
+                        @await Component.InvokeAsync("WriterLastBlog", new { id = ViewBag.i })
+
+                        @await Component.InvokeAsync("BlogLast3Post")
+                    </div>
+
+                </aside>
+                <!--//right-->
+            </div>
+        </div>
+    </section>
+    <!--//main-->
+    <!--footer-->
+
+
+
+    <script>
+        async function toggleLike(blogId) {
+            try {
+                const res = await fetch('/Blog/ToggleLike/' + blogId, {
+                    method: 'POST',
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                });
+
+                if (res.status === 401) {
+                    window.location.href = '/Login/Index/';
+                    return;
+                }
+
+                if (!res.ok) {
+                    const txt = await res.text();
+                    console.log("ToggleLike hata:", res.status, txt);
+                    return;
+                }
+
+                const data = await res.json();
+
+                document.getElementById('likeCount').innerText = data.likeCount;
+
+                const icon = document.getElementById('likeIcon');
+                icon.className = data.liked ? 'fas fa-thumbs-up' : 'far fa-thumbs-up';
+
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    </script>
+
+</body>
+</html>

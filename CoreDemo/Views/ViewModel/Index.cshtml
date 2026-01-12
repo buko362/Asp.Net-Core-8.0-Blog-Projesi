@@ -1,0 +1,15 @@
+﻿@model CoreDemo.Models.ViewModel
+@using (Html.BeginForm("Index","RegisterController",FormMethod.Post))
+
+{
+    <div class="form-group col-md-6">
+        <label for="validationCity mb-2">Şehir seçiniz</label>
+            <br/>
+        <label>
+            @if(Model!=null)
+        {
+            @Html.DropDownListFor(m=>m.Sehir,Model.Sehirler);
+        }
+    </label>
+    </div>
+}

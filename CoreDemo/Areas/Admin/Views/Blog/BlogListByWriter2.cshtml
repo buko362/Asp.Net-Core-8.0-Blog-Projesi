@@ -1,0 +1,83 @@
+﻿@using EntityLayer.Concrete
+@model List<Blog>
+@{
+    ViewData["Title"] = "BlogListByWriter2";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="m-t text-righ">
+            <a href="/Admin/Writer/WriterProfileList/" class="btn btn-xs btn-outline btn-warning">Geri Dön <i class="fa fa-long-arrow-left"></i> </a>
+        </div>
+        <br/>
+        <br/>
+        @await Component.InvokeAsync("WriterAboutByID",new {id=ViewBag.WriterId})
+        <h2 style="font:bold">Yazarın Blogları</h2>
+        <br />
+
+        <div class="row">
+            
+            @foreach (var item in Model)
+            {
+                <div class="col-md-3">
+                    <div class="ibox">
+                        <div class="ibox-content product-box">
+
+                            <div class="image-wrapper">
+                                <img src="@item.BlogImage" style="width:100%" />
+                            </div>
+                            <div class="product-desc">
+                                <span class="product-price">
+                                    @(((DateTime)item.BlogCreateDate).ToString("dd-MMM-yyyy"))
+                                </span>
+                                <small class="text-muted">@item.Category.CategoryName</small>
+                                <a href="/Blog/BlogReadAll/@item.BlogID" class="product-name"> @item.BlogTitle</a>
+
+
+
+                                <div class="small m-t-xs">
+                                    @{
+                                        var content = item.BlogContent;
+                                        if (string.IsNullOrWhiteSpace(content))
+                                        {
+                                            @:~
+                                        }
+                                        else if (content.Length <= 100)
+                                        {
+                                            @content
+                                        }
+                                        else
+                                        {
+                                            var cut = content.Substring(0, 100);
+                                            var lastSpace = cut.LastIndexOf(' ');
+                                            if (lastSpace <= 0) lastSpace = 100;
+
+                                            @content.Substring(0, lastSpace)
+                                
+                                            @:...
+
+                                        }
+                                    }
+                                </div>
+                                <div class="m-t text-righ">
+
+                                    <a href="/Blog/BlogReadAll/@item.BlogID" class="btn btn-xs btn-outline btn-primary">Detaylar <i class="fa fa-long-arrow-right"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>
+

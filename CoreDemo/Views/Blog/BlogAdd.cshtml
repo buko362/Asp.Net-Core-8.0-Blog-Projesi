@@ -1,0 +1,27 @@
+﻿@model CoreDemo.Models.BlogAddViewModel
+@{
+    ViewData["Title"] = "BlogAdd";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<h1>Yeni Blog Ekle</h1>
+<br />
+@using (Html.BeginForm("BlogAdd","Blog",FormMethod.Post,new{enctype="multipart/form-data"}))//formmetod post olduğu zaman blog içindeki blogaddde çalışacaksın
+{
+    @Html.Label("Blog Başlığı")
+    @Html.TextBoxFor(x=>x.BlogTitle,new {@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.BlogTitle)//blogtitleA göre yap
+    <br/>
+    @Html.Label("Blog Görseli")
+    <input type="file" name="BlogImageFile" class="form-control"/>
+    @Html.ValidationMessageFor(x => x.BlogImageFile)
+    <br />
+    @Html.Label("Kategori")
+    @Html.DropDownListFor(x=>x.CategoryId,(List<SelectListItem>)ViewBag.cv, new {@class="form-control"}) //cvdem gelen değeri çek
+    <br />
+    @Html.Label("Blog İçeriği")    // 15satırlık
+    @Html.TextAreaFor(x => x.BlogContent,15,3, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.BlogContent)
+    <br/>
+    <button class="btn btn-primary">Kaydet</button>
+}

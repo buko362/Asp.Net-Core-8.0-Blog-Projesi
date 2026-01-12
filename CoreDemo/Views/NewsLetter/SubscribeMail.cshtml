@@ -1,0 +1,39 @@
+﻿<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<div class="tech-btm">
+	
+	<p>Teknoloji, yazılım ve diğer bloglar...</p>
+	<form  class="newsletterForm">
+		<input type="email" placeholder="Email" required="" name="Mail" id="txtMail"/>
+		<input type="submit" id="btn" value="Abone Ol" />
+	</form>
+
+	<div id="resultMessage"></div>
+</div>
+
+
+@* eski script(ödevdi)
+<script>
+	$(".newsletterForm").submit(function(e){
+		e.preventDefault();
+		$.ajax({
+			url:"/NewsLetter/SubscribeMail",
+			type:"POST",
+			data:{
+				Mail:$("#txtMail").val()
+			},
+			success:function(res){
+				if(res.success){
+					$("#resultMessage").html("Başarıyla abone oldunuz.");
+					$("#txtMail").val("");//inputu temizle
+				}else{
+					$("#resultMessage").html("bir hata oluştu.");
+				}
+			},
+			error:function(){
+				$("#resultMessage").html("Sunucu hatası oluştu.");
+			}
+		});
+	});
+</script>
+*@

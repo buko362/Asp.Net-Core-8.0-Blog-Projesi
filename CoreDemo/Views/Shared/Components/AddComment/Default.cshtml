@@ -1,0 +1,70 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="comment-top">
+	<h4>Bir Yorum Bırakın</h4>
+
+	@if (!User.Identity.IsAuthenticated)
+	{
+		<div class="alert alert-warning">
+			Yorum yapmak için <a href="/Login/Index/">giriş yap!</a>
+		</div>
+	}
+	else
+	{
+		<div class="comment-bottom">
+			@if (TempData["RatingError"] != null)
+			{
+				<div class="alert alert-danger">
+					 @TempData["RatingError"]
+				</div>
+			}
+			<form method="post" asp-controller="Comment" asp-action="CommentAdd">
+				@Html.AntiForgeryToken()
+				<input type="hidden" name="BlogID" value="@ViewBag.BlogId" />
+
+				<input type="hidden" name="BlogScore" id="ratingValue" value="0"/>
+				<div id="starBox" style="font-size:28px; cursor:pointer; user-select:none; margin-bottom:10px; ">
+					<span class="star" data-value="1">☆</span>
+					<span class="star" data-value="2">☆</span>
+					<span class="star" data-value="3">☆</span>
+					<span class="star" data-value="4">☆</span>
+					<span class="star" data-value="5">☆</span>
+					<small id="ratingText" style="margin-left:8px;font-size:14px; "></small>
+				</div>
+				<textarea class="form-control" name="CommentContent" placeholder="Yorumunuz..." required=""></textarea>
+
+				<button type="submit" class="btn btn-primary">Yorum Yap</button>
+			</form>
+		</div>
+
+		<script>
+			(()=>{
+				const stars=document.querySelectorAll("#starBox .star");
+				const ratingValue=document.getElementById("ratingValue");
+				const ratingText=document.getElementById("ratingText");
+
+				function paint(val){
+					stars.forEach(s=>{
+						const v=+s.dataset.value;
+						s.textContent=(v <= val) ? "★" : "☆";
+					});
+					ratingText.textContent=val ? `(${val}/5)` : "(puan seç)";
+				}
+
+				stars.forEach(s=>{
+					s.addEventListener("click",()=>{
+						const val=+s.dataset.value;
+						ratingValue.value=val;
+						paint(val);
+					});
+					s.addEventListener("mouseenter",()=> paint(+s.dataset.value));
+				});
+				document.getElementById("starBox").addEventListener("mouseleave",()=> paint(+ratingValue.value || 0));
+				paint(0);
+			})();
+		</script>
+	}
+</div>

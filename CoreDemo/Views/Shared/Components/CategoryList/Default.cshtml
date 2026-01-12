@@ -1,0 +1,20 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Category>
+
+@{
+	var counts = ViewBag.count as Dictionary<int, int>;
+}
+
+<div class="tech-btm">
+	<h4>Kategoriler</h4>
+	<ul class="list-group single">
+		@foreach(var item in Model)
+		{
+			var blogCount = (counts != null && counts.ContainsKey(item.CategoryID)) ? counts[item.CategoryID] : 0;
+
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+			@item.CategoryName
+			<span class="badge badge-primary badge-pill">@blogCount</span>
+		</li>
+		}
+	</ul>
+</div>

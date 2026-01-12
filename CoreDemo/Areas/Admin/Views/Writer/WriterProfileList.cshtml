@@ -1,0 +1,88 @@
+﻿@using EntityLayer.Concrete
+@model List<Writer>
+@{
+    ViewData["Title"] = "WriterProfileList";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            
+            @foreach(var item in Model)
+            {
+                <div class="col-md-3" >
+                    <div class="ibox">
+                        <div class="ibox-content product-box">
+
+                            <div>
+                                <img src="@item.AppUser.ImageUrl" style="width:382px;height:400px;" />
+                            </div>
+                            <div class="product-desc">
+                                
+                                @if (item.WriterStatus == true)
+                                {
+                                    <font color="green">
+                                        <span class="product-price">
+                                            <a href="#"><font color="white"> Aktif</font></a>
+                                        </span>
+                                    </font>
+                                }
+                                else
+                                {
+                                    <font color="red">
+                                        <span class="product-price">
+                                            <a href="#"><font color="white">Pasif</font></a>
+                                        </span>
+                                    </font>
+                                }
+
+                                <h4 class="text-muted">@item.WriterMail</h4>
+                                <a href="/Admin/Blog/BlogListByWriter2/@item.WriterID" class="product-name"> @item.WriterName</a>
+
+                                <div class="middle m-t-xs">
+
+                                    @{
+                                        var about = item.WriterAbout;
+                                        if (string.IsNullOrWhiteSpace(about))
+                                        {
+                                            @:~
+                                        }
+                                        else if (about.Length <= 50)
+                                        {
+                                            @about
+                                        }
+                                        else
+                                        {
+                                            var cut = about.Substring(0, 50);
+                                            var lastSpace = cut.LastIndexOf(' ');
+                                            if (lastSpace <= 0) lastSpace = 50;
+
+                                            @about.Substring(0,lastSpace)@:...
+                                        }
+                                    }
+
+
+                                    @*  @item.WriterAbout.Substring(0,item.WriterAbout.Substring(0,50).LastIndexOf(" "))...  *@
+                                </div>
+                                <div class="m-t text-righ">
+
+                                    <a href="/Admin/Blog/BlogListByWriter2/@item.WriterID" class="btn btn-xs btn-outline btn-primary">Detaylar <i class="fa fa-long-arrow-right"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>
+

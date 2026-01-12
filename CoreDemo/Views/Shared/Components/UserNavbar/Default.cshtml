@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using EntityLayer.Concrete
+@inject UserManager<AppUser> UserManager
+@{
+    Layout = null;
+}
+
+<div class="col-md-4 top-forms text-center mt-lg-3 mt-md-1 mt-0">
+	<span>Hoş Geldiniz!</span>
+
+
+	@if (User.Identity.IsAuthenticated)
+	{
+		var u = await UserManager.GetUserAsync(User);
+		var display = string.IsNullOrWhiteSpace(u?.NameSurname) ? u?.UserName : u?.NameSurname;
+
+		<span class="d-inline-flex align-items-center">
+			<span class="ml-2"><strong>@display</strong></span>
+		</span>
+		<a href="/Dashboard/Index/" class="btn btn-outline-warning">Profil</a>
+
+		<a href="/Login/LogOut/" class="btn btn-outline-danger">Çıkış</a>
+	}
+	else
+	{
+		<span class="mx-lg-4 mx-md-2  mx-1">
+			<a href="/Login/Index/">
+				<i class="fas fa-lock"></i> Giriş Yap
+			</a>
+		</span>
+		<span>
+			<a href="/RegisterUser/Index/">
+				<i class="far fa-user"></i> Kayıt Ol
+			</a>
+		</span>
+	}
+</div>

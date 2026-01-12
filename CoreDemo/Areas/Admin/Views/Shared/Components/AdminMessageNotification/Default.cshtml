@@ -1,0 +1,37 @@
+﻿@model List<EntityLayer.Concrete.Message2>
+@{
+    Layout = null;
+}
+
+
+<li class="dropdown">
+    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+        <i class="fa fa-envelope"></i> 
+    </a>
+    <ul class="dropdown-menu dropdown-messages">
+        <li>
+            <div class="dropdown-messages-box">
+                @foreach (var item in Model)
+                {
+                    <a class="dropdown-item float-left" href="profile.html">
+                        <img alt="image" class="rounded-circle" src="@item.SenderUser.WriterImage">
+                    </a>
+                    <div class="media-body">
+                        
+                        <strong>@item.SenderUser.WriterName</strong>sana bir mesaj gönderdi.  <br>
+                        <small class="text-muted">@item.MessageDate.ToShortDateString()</small>
+                    </div>
+                }
+            </div>
+        </li>
+
+        <li>
+            <div class="text-center link-block">
+                <a href="/Admin/Message/InBox/" class="dropdown-item">
+                    <i class="fa fa-envelope"></i> <strong>Tüm Mesajları Gör</strong>
+                </a>
+            </div>
+        </li>
+    </ul>
+</li>
+

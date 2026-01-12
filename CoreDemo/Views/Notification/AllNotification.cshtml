@@ -1,0 +1,47 @@
+﻿@using EntityLayer.Concrete
+@model List<Notification>
+@{
+    ViewData["Title"] = "AllNotification";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+@functions{
+    string TimeAgo(DateTime date)
+    {
+        var now = DateTime.Now;
+        var diff = now - date;
+
+        if (diff.TotalMinutes < 1)
+            return "Az önce";
+
+        if (diff.TotalMinutes < 60)
+            return $"{(int)diff.TotalMinutes} dakika önce";
+
+        if (diff.TotalHours < 24)
+            return $"{(int)diff.TotalHours} saat önce";
+
+        if (diff.TotalDays < 7)
+            return $"{(int)diff.TotalDays} gün önce";
+
+        return date.ToString("dd-MMM-yyyy");
+    }
+}
+
+
+<h1>Bildirimler</h1>
+<table class="table table-border">
+    <tr>
+        <th>#</th>
+        <th>Bildirim</th>
+        <th>Tarih</th>
+    </tr>
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>@item.NotificationType</td>
+            <td>@item.NotificationDetails</td>
+            <td>@TimeAgo(item.NotificationDate)</td>
+        </tr>
+    }
+</table>
+
