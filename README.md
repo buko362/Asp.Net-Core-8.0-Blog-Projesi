@@ -5,7 +5,8 @@ Kullanıcıların blogları görüntüleyebildiği, yorum yapabildiği ve içeri
 
 Projede blogların puanlanması, yorumlanması, kullanıcılar arası mesajlaşma, rol bazlı yetkilendirme ve dinamik yönetim panelleri gibi gerçek hayat senaryolarında karşılaşılan pek çok özellik uygulanmıştır.
 
--!-ÖNEMLİ-!-
+--!--ÖNEMLİ--!--
+
 BU REPO TOPLAM 3 PROJEDEN OLUŞUYOR. "BlogApiDemo" ve "jwt_core_proje_kampi" EĞİTİM İÇERİĞİNDE OLDUĞU İÇİN EKLENMİŞTİR. 
 
 ##--Projede Kullanılan Yapılar ve Özellikler--##
