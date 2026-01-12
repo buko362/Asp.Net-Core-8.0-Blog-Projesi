@@ -3,9 +3,19 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+<<<<<<< HEAD
 appsettings.Development.json
 appsettings.Production.json
 appsettings.Local.json
+=======
+# =========================
+# App settings & secrets
+# =========================
+appsettings.Development.json
+appsettings.Production.json
+appsettings.Local.json
+
+>>>>>>> e524fcb119034f0493cfe4e2072894322c700cf9
 # User-specific files
 *.rsuser
 *.suo
