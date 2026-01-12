@@ -13,10 +13,10 @@
 
 #-Yazar Paneli-#
 <p align="center">
-  <img src="images/writerdashboard.png" width="650">
-  <img src="images/writerdashboard2.png" width="650">
+  <img src="images/writerdashboard.png" width="600">
+  <img src="images/writerdashboard2.png" width="600">
   <img src="images/writereditprofile.png" width="600">
-  <img src="images/bloglistbywriter.png" width="650">
+  <img src="images/bloglistbywriter.png" width="600">
   <img src="images/editblog.png" width="600">
   <img src="images/blogadd.png" width="600">
 </p>
@@ -32,9 +32,9 @@
 
 #-Admin Paneli-#
 <p align="center">
-  <img src="images/admindashboard.png" width="700">
+  <img src="images/admindashboard.png" width="600">
   <img src="images/adminprofile.png" width="600">
-  <img src="images/adminchart.png" width="650">
+  <img src="images/adminchart.png" width="600">
   <img src="images/admininbox.png" width="600">
   <img src="images/adminsendbox.png" width="600">
   <img src="images/adminmaildetails.png" width="600">
@@ -46,12 +46,12 @@
 <p align="center">
   <img src="images/admincategory.png" width="600">
   <img src="images/adminaddcategory.png" width="600">
-  <img src="images/adminblogindex.png" width="650">
+  <img src="images/adminblogindex.png" width="600">
   <img src="images/admincomment.png" width="600">
-  <img src="images/adminwriterprofilelist.png" width="650">
-  <img src="images/adminbloglistbywriter.png" width="650">
+  <img src="images/adminwriterprofilelist.png" width="600">
+  <img src="images/adminbloglistbywriter.png" width="600">
   <img src="images/adminajax.png" width="600">
   <img src="images/adminrole.png" width="600">
   <img src="images/adminuserrolelist.png" width="600">
-  <img src="images/admin403.png" width="500">
+  <img src="images/admin403.png" width="600">
 </p>
