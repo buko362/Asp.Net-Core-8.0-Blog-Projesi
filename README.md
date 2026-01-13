@@ -21,6 +21,7 @@ Katmanlı Mimari (N-Tier Architecture) uygulanmıştır.
 SOLID prensipleri dikkate alınarak geliştirme yapılmıştır.
 
 ##--Kimlik Doğrulama ve Yetkilendirme--##
+
 ASP.NET Core Identity kullanılarak kullanıcı, yazar ve admin işlemleri yönetilmiştir.
 Authentication & Authorization mekanizmaları uygulanmıştır.
 Gerekli alanlarda [Authorize] attribute’ları kullanılmıştır.
@@ -32,6 +33,7 @@ Rol bazlı yetkilendirme ile:
 ayrımı sağlanmıştır.
 
 ##--Blog ve İçerik Yönetimi--##
+
 * Blog ekleme, güncelleme, silme işlemleri
 * Bloglara puan verme ve yorum yapma
 * Yazarın kendi bloglarını yönetebildiği özel panel
@@ -39,31 +41,33 @@ ayrımı sağlanmıştır.
 * Blog–Yorum ilişkilerinde veri bütünlüğü ve cascade delete yönetimi
 
 ##--Mesajlaşma ve Bildirim Sistemi--##
+
 * Kullanıcılar, yazarlar ve adminler arasında çalışan dahili mesajlaşma sistemi
 * Inbox / Sendbox yapısı
 * Mesaj detay ve yanıtla (reply) özelliği
 * Bildirim mantığı ile yeni mesajların görüntülenmesi
 
 ##--Dinamik Yapılar--##
+
 ViewComponent kullanılarak:
 * Son bloglar
 * Yazarın diğer yazıları
 * Bildirim alanları
 gibi tekrar eden alanlar dinamik hâle getirilmiştir.
 
-AJAX kullanılarak:
-Admin panelinde dinamik işlemler
-Sayfa yenilenmeden veri güncellemeleri
-sağlanmıştır.
+Eğitim içinde AJAX kullanılarak:
+Admin panelinde dinamik işlemler sayfa yenilenmeden veri güncellemeleri sağlanmıştır. Veri tabanına şu anlık bir etkisi yoktur. 
 
 ##--Veritabanı ve Performans--##
+
 Entity Framework Core (Code First) yaklaşımı kullanılmıştır.
 Migration yapısı projeye dâhildir.
 LINQ sorguları ile veri işlemleri gerçekleştirilmiştir.
 Async / Await ve senkron işlemler performans dikkate alınarak birlikte kullanılmıştır.
 
 ##--Güvenlik ve API Yapıları--##
-JSON Web Token (JWT) kullanılarak token tabanlı kimlik doğrulama senaryoları uygulanmıştır.
+
+Eğitim içinde JSON Web Token (JWT) kullanılarak token tabanlı kimlik doğrulama senaryoları uygulanmıştır.
 Yetkisiz erişimler için 403 Access Denied sayfaları oluşturulmuştur.
 Kullanıcı-yazar Admin paneline girse bile yetkisi olmadığı sayfaları göremez.
 
