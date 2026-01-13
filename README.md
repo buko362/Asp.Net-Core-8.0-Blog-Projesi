@@ -71,6 +71,10 @@ Eğitim içinde JSON Web Token (JWT) kullanılarak token tabanlı kimlik doğrul
 Yetkisiz erişimler için 403 Access Denied sayfaları oluşturulmuştur.
 Kullanıcı-yazar Admin paneline girse bile yetkisi olmadığı sayfaları göremez.
 
+
+####----Kullandığım temalar wwwroot içinde mevcuttur. Ekstra sayfa yapmak isterseniz göz atabilirsiniz.----####
+
+
 ##---PROJE GÖRÜNÜMÜ---##
 
 #-Kullanıcı Arayüzü-#
